@@ -11,7 +11,7 @@ const int SCREEN_WIDTH = 800;
 const int SCREEN_HEIGHT = 600;
 
 
-int main(int argc, char** argv)
+int main63(int argc, char** argv)
 {
 
 	SDL_GetVersion(&SDL_dll_version);
