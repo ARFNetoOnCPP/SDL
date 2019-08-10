@@ -35,13 +35,6 @@ namespace particles
 	
 	void Screen::fillScreen(Uint8 red, Uint8 green, Uint8 blue)
 	{
-		std::cout <<
-			"----- fillScreen(" << (Uint32) red <<
-			", " << (Uint32) green <<
-			", " << (Uint32) blue <<
-			") -----" <<
-			std::endl;
-
 		for (int y = 0; y < SCREEN_HEIGHT; y++)
 		{
 			for (int x = 0; x < SCREEN_WIDTH; x++)
@@ -49,7 +42,6 @@ namespace particles
 				setPixel(x, y, red, green, blue);
 			}	// end for
 		}	// end for
-
 
 	};	// end fillScreen
 
@@ -146,9 +138,18 @@ namespace particles
 
 	void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 	{
-		Uint32 color = (red<<24) + (green<<16) + (blue<<8) + 0xFF;
+		const int alpha = 0xFF;
+		Uint32 color = (red<<24) + (green<<16) + (blue<<8) + alpha;
 		m_buffer[(y * SCREEN_WIDTH) + x] = color;
 		return;
 	};	// end setPixel()
+
+	void Screen::update()
+	{
+		SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+		SDL_RenderClear(m_renderer);
+		SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+		SDL_RenderPresent(m_renderer);
+	}
 
 }	// end namespace particles

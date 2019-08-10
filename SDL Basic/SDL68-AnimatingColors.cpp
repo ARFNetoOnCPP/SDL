@@ -8,7 +8,7 @@
 using namespace std;
 using namespace particles;
 
-int main68(int argc, char** argv)
+int main(int argc, char** argv)
 {
 	Screen screen;
 
@@ -25,11 +25,13 @@ int main68(int argc, char** argv)
 	while (!screen.processEvents())
 	{
 		int elapsed = SDL_GetTicks();
-		unsigned char green = (unsigned char)((1 + sin(elapsed * 0.001)) * 128);
-		screen.fillScreen(0, green, 0);
+		unsigned char red = (unsigned char)((1 + sin(elapsed * 0.0001)) * 128);
+		unsigned char green = (unsigned char)((1 + sin(elapsed * 0.0002)) * 128);
+		unsigned char blue = (unsigned char)((1 + sin(elapsed * 0.0003)) * 128);
+		screen.fillScreen(red, green, blue);
 		screen.update();
-	}	// end while
 
+	}	// end while
 	screen.close();
 	return EXIT_SUCCESS;
 

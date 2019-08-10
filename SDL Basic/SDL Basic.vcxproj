@@ -162,6 +162,8 @@
     <ClCompile Include="SDL62-Window.cpp" />
     <ClCompile Include="SDL63-Textures.cpp" />
     <ClCompile Include="SDL65-ScreenClass.cpp" />
+    <ClCompile Include="SDL68-AnimatingColors.cpp" />
+    <ClCompile Include="TestRGBMask.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="maskTest.h" />
