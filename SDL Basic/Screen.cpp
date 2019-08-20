@@ -18,14 +18,33 @@ namespace particles
 			SDL_compile_version.minor,
 			SDL_compile_version.patch);
 
-		m_buffer = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
-		memset(m_buffer, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		m_buffer1 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+		m_buffer2 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
+		memset(m_buffer1, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		memset(m_buffer2, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
 
 	}	// end Screen()
 
+	void Screen::boxBlur()
+	{
+		Uint32* temp = m_buffer1;
+		m_buffer1 = m_buffer2;
+		m_buffer2 = temp;
+
+
+	}	// end boxBlur()
+
+	void Screen::clear()
+	{
+		memset(m_buffer1, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		memset(m_buffer2, 0, SCREEN_WIDTH * SCREEN_HEIGHT * sizeof(Uint32));
+		return;
+	}
+
 	void Screen::close()
 	{
-		delete[] m_buffer;
+		delete[] m_buffer1;
+		delete[] m_buffer2;
 		SDL_DestroyTexture(m_texture);
 		SDL_DestroyRenderer(m_renderer);
 		SDL_DestroyWindow(m_window);
@@ -139,14 +158,20 @@ namespace particles
 	void Screen::setPixel(int x, int y, Uint8 red, Uint8 green, Uint8 blue)
 	{
 		const int alpha = 0xFF;
+		// test if pixel coordinates is off screen
+		if (x < 0) return;
+		if (x >= SCREEN_WIDTH) return;
+		if (y < 0) return;
+		if (y >= SCREEN_HEIGHT) return;
+
 		Uint32 color = (red<<24) + (green<<16) + (blue<<8) + alpha;
-		m_buffer[(y * SCREEN_WIDTH) + x] = color;
+		m_buffer1[(y * SCREEN_WIDTH) + x] = color;
 		return;
 	};	// end setPixel()
 
 	void Screen::update()
 	{
-		SDL_UpdateTexture(m_texture, NULL, m_buffer, SCREEN_WIDTH * sizeof(Uint32));
+		SDL_UpdateTexture(m_texture, NULL, m_buffer1, SCREEN_WIDTH * sizeof(Uint32));
 		SDL_RenderClear(m_renderer);
 		SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 		SDL_RenderPresent(m_renderer);

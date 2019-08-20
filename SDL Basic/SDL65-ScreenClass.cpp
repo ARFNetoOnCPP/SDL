@@ -8,7 +8,7 @@
 using namespace std;
 using namespace particles;
 
-int main68(int argc, char** argv)
+int main65(int argc, char** argv)
 {
 	Screen screen;
 

@@ -4,15 +4,79 @@
 #include "SDL.h"
 
 using namespace std;
-struct maskTest
+class MaskTest
 {
-	unsigned const int alpha = 0xFF;
-	unsigned const int R = 0x12;
-	unsigned const int G = 0x34;
-	unsigned const int B = 0x56;
+	unsigned const int alpha =	0xFF;
+	unsigned const int R =		0x12;
+	unsigned const int G =		0x34;
+	unsigned const int B =		0x56;
 
 	
-	maskTest()
+public:
+	static unsigned char  getRed(unsigned int color)
+	{
+		cout << "***** getRed(color)" << endl;
+		std::cout <<
+			"color: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		color = color >> 24;
+		std::cout <<
+			"Red component: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		return color;
+	}	// end getRed()
+
+	static unsigned char  getGreen(unsigned int color)
+	{
+		cout << "***** getGreen(color)" << endl;
+		std::cout <<
+			"color: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		color = (color >> 16) & 0xFF;
+		std::cout <<
+			"Green component: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		return color;
+	}	// end getGreen()
+
+	static unsigned char  getBlue(unsigned int color)
+	{
+		cout << "***** getBlue(color)" << endl;
+		std::cout <<
+			"color: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		color = (color >> 8) & 0xFF;
+		std::cout <<
+			"Blue component: " <<
+			std::setfill('0') <<
+			std::setw(8) <<
+			std::hex <<
+			color <<
+			std::endl;
+		return color;
+	}	// end getBlue()
+
+	MaskTest()
 	{
 		unsigned int color;
 		cout << "***** mask test constructor" << endl;
@@ -63,7 +127,7 @@ struct maskTest
 			std::hex <<
 			color <<
 			std::endl;
-	}
+	}	// end MaskTest()
 
 	void maskSet(Uint8 red, Uint8 green, Uint8 blue)
 	{
@@ -144,6 +208,7 @@ struct maskTest
 
 		return;
 
-	}	// end maskSet()
-};
+	}	// end MaskSet()
+
+};	// end struct MaskTest
 

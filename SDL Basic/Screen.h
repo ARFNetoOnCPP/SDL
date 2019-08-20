@@ -10,6 +10,9 @@ namespace particles
 		const static int SCREEN_WIDTH = 800;
 		const static int SCREEN_HEIGHT = 600;
 
+		const static int SCREEN_HALF_WIDTH = SCREEN_WIDTH / 2;
+		const static int SCREEN_HALF_HEIGHT = SCREEN_HEIGHT / 2;
+
 	private:
 		SDL_version		SDL_compile_version;
 		SDL_version		SDL_dll_version;
@@ -17,11 +20,14 @@ namespace particles
 		SDL_Window* m_window;
 		SDL_Renderer* m_renderer;
 		SDL_Texture* m_texture;
-		Uint32* m_buffer;
+		Uint32* m_buffer1;
+		Uint32* m_buffer2;
 
 	public:
 		Screen();
 
+		void boxBlur();
+		void clear();
 		void close();
 		void fillScreen(Uint8 red, Uint8 green, Uint8 blue);
 		bool init();
