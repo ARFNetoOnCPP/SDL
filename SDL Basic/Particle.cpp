@@ -16,7 +16,8 @@ namespace particles
 		//	m_xspeed = 0.01 * (((2.0 * rand()) / RAND_MAX) - 1);
 		//	m_yspeed = 0.01 * (((2.0 * rand()) / RAND_MAX) - 1);
 		m_direction = (2 * M_PI * rand()) / RAND_MAX;
-		m_speed = (0.001 * rand()) / RAND_MAX;
+		m_speed = (0.4 * rand()) / RAND_MAX;
+		m_speed = m_speed * m_speed;
 	}
 
 	Particle::~Particle()
