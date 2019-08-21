@@ -15,7 +15,7 @@ namespace particles
 
 	private:
 
-		const Uint32 MaxBlurCycles = 100;
+		const Uint32 MaxBlurCycles = 500;
 		bool timerON = true;
 
 		SDL_version		SDL_compile_version;
@@ -39,7 +39,7 @@ namespace particles
 		~Screen();
 
 		void boxBlurA();
-		void boxBlurB();
+		void boxBlur();
 		void boxBlurJ();
 		void clear();
 		void close();

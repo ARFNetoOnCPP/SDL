@@ -159,15 +159,7 @@
   <ItemGroup>
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Screen.cpp" />
-    <ClCompile Include="SDL Basic.cpp" />
-    <ClCompile Include="SDL62-Window.cpp" />
-    <ClCompile Include="SDL63-Textures.cpp" />
-    <ClCompile Include="SDL65-ScreenClass.cpp" />
-    <ClCompile Include="SDL68-AnimatingColors.cpp" />
-    <ClCompile Include="SDL69-CreatingParticles.cpp" />
-    <ClCompile Include="SDL70-AnimatingParticles.cpp" />
-    <ClCompile Include="SDL71-Explosion.cpp" />
-    <ClCompile Include="SDL74-Blur.cpp" />
+    <ClCompile Include="SDL75-Motion.cpp" />
     <ClCompile Include="Swarm.cpp" />
     <ClCompile Include="TestRGBMask.cpp" />
   </ItemGroup>

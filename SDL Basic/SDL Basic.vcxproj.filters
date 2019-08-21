@@ -15,28 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SDL Basic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL62-Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL63-Textures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL65-ScreenClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Screen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TestRGBMask.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL68-AnimatingColors.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL69-CreatingParticles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
@@ -45,13 +27,7 @@
     <ClCompile Include="Swarm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SDL70-AnimatingParticles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL71-Explosion.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SDL74-Blur.cpp">
+    <ClCompile Include="SDL75-Motion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
