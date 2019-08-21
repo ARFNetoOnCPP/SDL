@@ -13,14 +13,14 @@ using namespace particles;
 
 int main(int argc, char** argv)
 {
-	int j = 0;
-	//MaskTest mask;
-	j = 0x123456FF;
-	MaskTest::getRed(j);
-	MaskTest::getGreen(j);
-	MaskTest::getBlue(j);
-	j = 0;
-	if (j == 0) return 0;
+	//int j = 0;
+	////MaskTest mask;
+	//j = 0x123456FF;
+	//MaskTest::getRed(j);
+	//MaskTest::getGreen(j);
+	//MaskTest::getBlue(j);
+	//j = 0;
+	//if (j == 0) return 0;
 
 	srand((unsigned int)time(NULL));
 
@@ -57,7 +57,7 @@ int main(int argc, char** argv)
 			int y = (int)(particle.m_y * Screen::SCREEN_WIDTH / 2) + Screen::SCREEN_HEIGHT / 2;
 			screen.setPixel(x, y, red, green, blue);
 		}	// end for
-		screen.boxBlur();
+		screen.boxBlurB();
 		screen.update();
 
 	}	// end while

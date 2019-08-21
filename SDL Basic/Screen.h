@@ -14,6 +14,10 @@ namespace particles
 		const static int SCREEN_HALF_HEIGHT = SCREEN_HEIGHT / 2;
 
 	private:
+
+		const Uint32 MaxBlurCycles = 100;
+		bool timerON = true;
+
 		SDL_version		SDL_compile_version;
 		SDL_version		SDL_dll_version;
 
@@ -23,10 +27,20 @@ namespace particles
 		Uint32* m_buffer1;
 		Uint32* m_buffer2;
 
+		Uint32	blurTime;
+		Uint32	minBlurTime;
+		Uint32	maxBlurTime;
+		Uint32  blurCycles;
+
+		double  blurAverageTime;
+
 	public:
 		Screen();
+		~Screen();
 
-		void boxBlur();
+		void boxBlurA();
+		void boxBlurB();
+		void boxBlurJ();
 		void clear();
 		void close();
 		void fillScreen(Uint8 red, Uint8 green, Uint8 blue);
