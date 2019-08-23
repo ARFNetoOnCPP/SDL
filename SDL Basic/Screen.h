@@ -38,8 +38,8 @@ namespace particles
 		Screen();
 		~Screen();
 
-		void boxBlurA();
 		void boxBlur();
+		void boxBlurB();
 		void boxBlurJ();
 		void clear();
 		void close();
