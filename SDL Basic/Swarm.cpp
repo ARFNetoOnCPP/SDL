@@ -4,9 +4,10 @@
 namespace particles
 {
 
-	Swarm::Swarm():
+	Swarm::Swarm(unsigned int n):
 		lastTime(0)
 	{
+		NPARTICLES = n;
 		m_pParticles = new Particle[NPARTICLES];
 
 	}

@@ -2,7 +2,7 @@
 #include <iostream>
 namespace particles
 {
-	Screen::Screen():
+	Screen::Screen(int width, int height):
 		m_window(NULL),
 		m_renderer(NULL),
 		m_texture(NULL)
@@ -18,6 +18,11 @@ namespace particles
 			SDL_compile_version.major,
 			SDL_compile_version.minor,
 			SDL_compile_version.patch);
+
+		SCREEN_WIDTH = width;
+		SCREEN_HEIGHT = height;
+		SCREEN_HALF_WIDTH = SCREEN_WIDTH / 2;
+		SCREEN_HALF_HEIGHT = SCREEN_HEIGHT / 2;
 
 		m_buffer1 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
 		m_buffer2 = new Uint32[SCREEN_WIDTH * SCREEN_HEIGHT];
@@ -101,7 +106,6 @@ namespace particles
 		// 7 8 9
 		//
 		Uint32 baseY;
-		Uint32 baseX;
 		Uint32 l;	// to point inside buffer
 		Uint32 r;
 		Uint32 z;
@@ -206,7 +210,7 @@ namespace particles
 		r = SCREEN_WIDTH * (SCREEN_HEIGHT - 2);	// start of the row before last one
 		z = r + 1;
 		t = r + 2;
-		for (Uint32 x = 0; x < (SCREEN_WIDTH - 2); x++)
+		for (Uint32 x = 0; x < (Uint32)(SCREEN_WIDTH - 2); x++)
 		{
 			// 1 2 3
 			red =	(Uint8)(m_buffer2[x+r] >> 24) + (Uint8)(m_buffer2[x+z] >> 24) + (Uint8)(m_buffer2[x+t] >> 24);
@@ -372,105 +376,6 @@ namespace particles
 		}	// end if
 
 	}	// end boxBlur()	
-
-	void Screen::boxBlurB()
-	{
-		// swap
-		Uint32* temp = m_buffer1;
-		m_buffer1 = m_buffer2;
-		m_buffer2 = temp;
-
-		// start timer
-		Uint32 blurTime = SDL_GetTicks();
-		Uint32 baseY = 0;
-		for (int y = 1; y < SCREEN_HEIGHT - 1; y++)
-		{
-			for (int x = 1; x < SCREEN_WIDTH - 1; x++)
-			{
-				Uint32 l = baseY + x - 1;	// left pixel on this row: 1
-				Uint32 red =
-					(Uint8)(m_buffer2[l] >> 24) +
-					(Uint8)(m_buffer2[l + 1] >> 24) +
-					(Uint8)(m_buffer2[l + 2] >> 24);	// 1 2 3
-				Uint32 green =
-					(Uint8)(m_buffer2[l] >> 16) +
-					(Uint8)(m_buffer2[l + 1] >> 16) +
-					(Uint8)(m_buffer2[l + 2] >> 16);
-				Uint32 blue =
-					(Uint8)(m_buffer2[l] >> 8) +
-					(Uint8)(m_buffer2[l + 1] >> 8) +
-					(Uint8)(m_buffer2[l + 2] >> 8);
-
-				l = l + SCREEN_WIDTH;		// now we are at pixel 4
-				red +=
-					(Uint8)(m_buffer2[l] >> 24) +
-					(Uint8)(m_buffer2[l + 1] >> 24) +
-					(Uint8)(m_buffer2[l + 2] >> 24);		// 4 5 6
-				green +=
-					(Uint8)(m_buffer2[l] >> 16) +
-					(Uint8)(m_buffer2[l + 1] >> 16) +
-					(Uint8)(m_buffer2[l + 2] >> 16);
-				blue +=
-					(Uint8)(m_buffer2[l] >> 8) +
-					(Uint8)(m_buffer2[l + 1] >> 8) +
-					(Uint8)(m_buffer2[l + 2] >> 8);
-
-				l = l + SCREEN_WIDTH;		// now we are at pixel 7
-				red +=
-					(Uint8)(m_buffer2[l] >> 24) +
-					(Uint8)(m_buffer2[l + 1] >> 24) +
-					(Uint8)(m_buffer2[l + 2] >> 24);	// 7 8 9
-				green +=
-					(Uint8)(m_buffer2[l] >> 16) +
-					(Uint8)(m_buffer2[l + 1] >> 16) + (Uint8)
-					(m_buffer2[l + 2] >> 16);
-				blue +=
-					(Uint8)(m_buffer2[l] >> 8) +
-					(Uint8)(m_buffer2[l + 1] >> 8) +
-					(Uint8)(m_buffer2[l + 2] >> 8);
-				//
-				// if we did it ok, just divide by 9 to get the average color for the pixel 5 (x,y)
-				setPixel(x, y, (Uint8)(red / 9), (Uint8)(green / 9), (Uint8)(blue / 9));
-
-			}	// end for x
-			baseY += SCREEN_WIDTH;
-		}	// end for y
-
-		// stop timer
-		blurTime = SDL_GetTicks() - blurTime;
-		// gather statistics
-		minBlurTime = (blurTime < minBlurTime) ? blurTime : minBlurTime;
-		maxBlurTime = (blurTime > maxBlurTime) ? blurTime : maxBlurTime;
-		if (blurCycles < MaxBlurCycles)
-		{
-			blurAverageTime += blurTime;
-			blurCycles += 1;
-		}
-		else
-		{
-			if (timerON)
-			{
-				timerON = false;
-				std::cout <<
-					"boxBlur() time min: " <<
-					minBlurTime <<
-					"ms max: " <<
-					maxBlurTime <<
-					"ms" <<
-					std::endl;;
-				// average blur time
-				std::cout <<
-					"Average blur time for " <<
-					SCREEN_HEIGHT * SCREEN_WIDTH <<
-					" particles and " <<
-					blurCycles <<
-					" cycles was " <<
-					(blurAverageTime / blurCycles) << " ms" <<
-					std::endl;
-			}	// end if
-		}	// end if
-
-	}	// end boxBlurB()	
 
 
 

@@ -7,11 +7,10 @@ namespace particles
 	class Screen
 	{
 	public:
-		const static int SCREEN_WIDTH = 800;
-		const static int SCREEN_HEIGHT = 600;
-
-		const static int SCREEN_HALF_WIDTH = SCREEN_WIDTH / 2;
-		const static int SCREEN_HALF_HEIGHT = SCREEN_HEIGHT / 2;
+		int SCREEN_WIDTH;
+		int SCREEN_HEIGHT;
+		int SCREEN_HALF_WIDTH;
+		int SCREEN_HALF_HEIGHT;
 
 	private:
 
@@ -35,11 +34,10 @@ namespace particles
 		double  blurAverageTime;
 
 	public:
-		Screen();
+		Screen(int, int);
 		~Screen();
 
 		void boxBlur();
-		void boxBlurB();
 		void boxBlurJ();
 		void clear();
 		void close();

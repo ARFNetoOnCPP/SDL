@@ -6,14 +6,14 @@ namespace particles
 	class Swarm
 	{
 	public:
-		const static int NPARTICLES = 5000;
+		int NPARTICLES;
 
 	private:
 		Particle* m_pParticles;
 		int			lastTime;
 
 	public:
-		Swarm();
+		Swarm(unsigned int);
 		virtual ~Swarm();
 
 		const Particle* const getParticles()
